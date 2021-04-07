@@ -1,4 +1,4 @@
-package com.example.swhotdeal;
+package com.GnuApp.swhotdeal;
 
 import org.junit.Test;
 
