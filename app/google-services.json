@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "727470924385",
+    "project_id": "swhotdealfb",
+    "storage_bucket": "swhotdealfb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727470924385:android:428bdbd4ac25aef19e0020",
+        "android_client_info": {
+          "package_name": "com.GnuApp.swhotdeal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "727470924385-b6oqdnb5grcesc2m06vkuhlda7fuiqug.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.GnuApp.swhotdeal",
+            "certificate_hash": "0bd08c95ee9925ce51698d18ff26d2d7019a85f4"
+          }
+        },
+        {
+          "client_id": "727470924385-pjtp3fpog9ut12t66epbrl4s33b1hls3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvLTqEvKGoj377JJ1IdKTAVjjEMbAzcPA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "727470924385-pjtp3fpog9ut12t66epbrl4s33b1hls3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
