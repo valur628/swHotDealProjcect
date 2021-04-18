@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/hotdeal_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/img_rep_pic"
+            android:layout_width="213dp"
+            android:layout_height="120dp"
+            app:srcCompat="@drawable/img_sw_none" />
+
+        <LinearLayout
+            android:id="@+id/sw_info"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/id_sw_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="소프트웨어 이름"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <LinearLayout
+                android:id="@+id/cost_and_pic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/cost_dis"
+                    android:layout_width="80dp"
+                    android:layout_height="70dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/id_cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="원가" />
+
+                    <TextView
+                        android:id="@+id/id_dis_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="할인가" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/img_plat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/logo_humble_bundle" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
