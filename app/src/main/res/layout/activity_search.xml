@@ -8,21 +8,15 @@
     android:paddingStart="15dp"
     android:paddingEnd="10dp">
 
-    <LinearLayout
+    <SearchView
+        android:id="@+id/search_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        app:iconifiedByDefault="false"
+        app:queryHint="소프트웨어를 검색">
 
-        <SearchView
-            android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFF"
-            app:iconifiedByDefault="false"
-            app:queryHint="소프트웨어를 검색">
-
-        </SearchView>
-
-    </LinearLayout>
+    </SearchView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/hotdeal_recycler"
