@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Button;
 import android.view.View;
 
@@ -16,6 +17,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            public void run() {
+//                setContentView(R.layout.activity_main); // theme로 스플래시 화면 구현
+//            }
+//        }, 2000);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
