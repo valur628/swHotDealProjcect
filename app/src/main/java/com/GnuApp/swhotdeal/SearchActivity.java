@@ -55,105 +55,17 @@ public class SearchActivity extends AppCompatActivity {
 //      CharSequence fireQuery = searchView.getQuery();
         search_intent = getIntent();
 
-//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//
-//                // 검색 버튼 누를 때 호출
-//
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//
-//                // 검색창에서 글자가 변경이 일어날 때마다 호출
-//
-//                return true
-//            }
-//        })
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
-
-//    @Override
-//    SearchView searchView = findViewById(R.id.search_view);
-//    ImageButton selectButton = findViewById(R.id.search_button);
-//    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//        public boolean onQueryTextSubmit(String query) {
-//            select_area_intent = getIntent();
-//            String select_area = select_area_intent.getStringExtra("Select_area");
-//            Log.d("onQueryTextChange" , arrayList.toString());
-//
-//            Log.d("search", "nothing");
-//
-//
-//            String[] stringArray;
-//            Log.d("onQueryTextSubmit" , arrayList.toString());
-//            Log.d("search" , arrayList.toString());
-//            Log.d("search", query);
-//
-//            stringArray = query.split(" ");
-//            int size = arrayList.size();
-//            try {
-//                for(int i = 0 ; i < size ; i++){
-//                    for(String s : stringArray){
-//                        if(s.length() > 0 &&s.charAt(0) == '#'){
-//                            if(arrayList.get(i).getExpert().contains(s.substring(1))){
-//                                continue;
-//                            }
-//                        }else{
-//                            if(s.length() > 0 && arrayList.get(i).getName().contains(s)){
-//                                continue;
-//                            }
-//                        }
-//                        arrayList.remove(i);
-//                        if(size > 0)
-//                            size--;
-//                        if(i > 0)
-//                            i--;
-//                    }
-//                }
-//            }catch (IndexOutOfBoundsException e){
-//                e.printStackTrace();
-//            }
-//
-//            Log.d("arrayList2", arrayList.toString());
-//
-//            adapter.notifyDataSetChanged();
-//
-//            for(int i = 0 ; i < arrayList.size() ; i++)
-//                Log.d("onclick", arrayList.get(i).getName());
-//            return true;
-//        }
-//
-//        @Override
-//        public boolean onQueryTextChange(String newText) {
-//            FirebaseFirestore db = FirebaseFirestore.getInstance();// 파이어베이스 데이터베이스 연동
-//            if(flag || newText.equals(""))
-//                db.collection(select_area).orderBy("name"). //파이어베이스에서 Danbi01 collection을 연결한다.
-//                        get()
-//                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                                if (task.isSuccessful()){
-//                                    arrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화시켜줌.
-//                                    for (QueryDocumentSnapshot document : task.getResult()){
-//                                        CounsellingCenter counselingCenter = document.toObject(CounsellingCenter.class);
-//                                        arrayList.add(counselingCenter); //데이터를 배열리스트에 담아 리사이클러 뷰로 보낼 준비
-//                                        Log.d("hwang", counselingCenter.getGcs().toString());
-//                                        Log.d("ClinicList", document.getId() + "=>" + document.getData());
-//
-//                                        adapter.notifyDataSetChanged();
-//                                        flag =false;
-//
-//                                    }
-//                                    //리스트 저장 및 새로고침
-//
-//                                } else {
-//                                    Log.w("ClinicList", "Error getting documents.", task.getException());
-//                                }
-//                            }
-//                        });
-//            return true;
-//
-//        }
-//    });
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/hot_red_primary</item>
+        <item name="colorPrimaryDark">@color/hot_red_primary_var</item>
+        <item name="colorAccent">@color/hot_red_accent</item>
+
+        <!-- No Title Bar-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!-- white status bar -->
+        <item name="android:statusBarColor">@color/hot_red_primary</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <!-- Splash theme. -->
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/hot_red_primary</item>
+        <item name="colorPrimaryDark">@color/hot_red_primary_var</item>
+        <item name="colorAccent">@color/hot_red_accent</item>
+
+        <!-- No Title Bar-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!-- white status bar -->
+        <item name="android:statusBarColor">@color/hot_red_primary</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- background -->
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
+</resources>

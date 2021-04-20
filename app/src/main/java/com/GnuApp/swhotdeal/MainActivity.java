@@ -27,17 +27,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
-        activity = this;
-
-        hotDealArrayList = new ArrayList<HotDeal>();
-
-        layoutManager = new LinearLayoutManager(activity);
-        recyclerView = findViewById(R.id.hotdeal_recycler);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
+//        getSupportActionBar().hide();
+//        activity = this;
+//
+//        hotDealArrayList = new ArrayList<HotDeal>();
+//
+//        layoutManager = new LinearLayoutManager(activity);
+//        recyclerView = findViewById(R.id.hotdeal_recycler);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(layoutManager);
 
         Button searchButton = findViewById(R.id.button_search);
         searchButton.setOnClickListener(new View.OnClickListener() {
