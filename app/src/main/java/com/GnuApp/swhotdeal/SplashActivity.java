@@ -11,23 +11,8 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        getSupportActionBar().hide();
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intentSplash = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intentSplash);
-                finish();
-            }
-        }, 3000);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
+        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+        startActivity(intent);
         finish();
     }
 }
