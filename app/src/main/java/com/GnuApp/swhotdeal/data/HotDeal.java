@@ -1,4 +1,4 @@
-package com.GnuApp.swhotdeal;
+package com.GnuApp.swhotdeal.data;
 
 // 리사이클러 뷰 사용하기 위한 데이터, get
 public class HotDeal {
