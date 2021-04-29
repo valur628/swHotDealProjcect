@@ -26,8 +26,6 @@ import java.util.ArrayList;
 public class HotdealFragment extends Fragment {
 
     TextView maintitle;
-    Activity activity;
-    Button searchButton;
     ArrayList<HotDeal> hotDealArrayList;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -37,12 +35,13 @@ public class HotdealFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         ViewGroup viewGroup = (ViewGroup)inflater.inflate(R.layout.fragment_hotdeal, container, false);
+        hotDealArrayList = new ArrayList<HotDeal>();
 
         recyclerView = viewGroup.findViewById(R.id.hotdeal_recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new HotDealAdapter(hotDealArrayList);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        adapter = new HotDealAdapter(hotDealArrayList);
+//        recyclerView.setAdapter(adapter);
+//        recyclerView.setHasFixedSize(true);
         return viewGroup;
     }
 }

@@ -29,11 +29,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_MENU = 101;
 
-    Activity activity;
-    Button searchButton;
-    ArrayList<HotDeal> hotDealArrayList;
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+//    Activity activity;
+//    Button searchButton;
+//    ArrayList<HotDeal> hotDealArrayList;
+//    RecyclerView recyclerView;
+//    RecyclerView.LayoutManager layoutManager;
 
     TextView maintitle;
 
@@ -45,17 +45,16 @@ public class MainActivity extends AppCompatActivity {
         String TAG = "MainActivity";
         String beforeString = "";
 
-        activity = this;
-        hotDealArrayList = new ArrayList<>();
-        layoutManager = new LinearLayoutManager(activity);
-        recyclerView = findViewById(R.id.hotdeal_recycler);
+//        activity = this;
+//        hotDealArrayList = new ArrayList<HotDeal>();
+//        layoutManager = new LinearLayoutManager(activity);
+//        recyclerView = findViewById(R.id.hotdeal_recycler);
 //        recyclerView.setHasFixedSize(true);
 //        recyclerView.setLayoutManager(layoutManager);
         // recyclerView를 만들긴 했는데 어떻게 다룰지 안 만듦.
         // recyclerView를 다루기 위한 어댑터를 만들자!
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavi);
-
         getSupportFragmentManager().beginTransaction().add(R.id.main_frame,new HotdealFragment()).commit();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
