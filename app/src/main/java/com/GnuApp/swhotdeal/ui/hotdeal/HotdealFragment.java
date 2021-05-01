@@ -35,7 +35,7 @@ public class HotdealFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         ViewGroup viewGroup = (ViewGroup)inflater.inflate(R.layout.fragment_hotdeal, container, false);
-        hotDealArrayList = new ArrayList<HotDeal>();
+        hotDealArrayList = new ArrayList<>();
 
         recyclerView = viewGroup.findViewById(R.id.hotdeal_recycler);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

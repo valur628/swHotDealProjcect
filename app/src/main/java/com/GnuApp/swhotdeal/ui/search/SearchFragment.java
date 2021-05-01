@@ -22,8 +22,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.GnuApp.swhotdeal.Controller;
 import com.GnuApp.swhotdeal.MainActivity;
 import com.GnuApp.swhotdeal.R;
+import com.GnuApp.swhotdeal.adapter.HotDealAdapter;
 import com.GnuApp.swhotdeal.data.HotDeal;
 import com.GnuApp.swhotdeal.adapter.SearchAdapter;
 
@@ -32,6 +34,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -42,6 +46,7 @@ public class SearchFragment extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     SearchView searchView;
     SearchAdapter mAdapter;
+    Controller controller;
     boolean flag = false;
 
     @Override
@@ -53,14 +58,18 @@ public class SearchFragment extends Fragment {
 
         hotDealArrayList = new ArrayList<HotDeal>();
         layoutManager = new LinearLayoutManager(getActivity());
+        mAdapter = new SearchAdapter(hotDealArrayList);
         recyclerView = rootView.findViewById(R.id.hotdeal_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setHasFixedSize(true);
         searchView = rootView.findViewById(R.id.search_view);
 
         return rootView;
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NotNull Menu menu, MenuInflater inflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
 
         inflater.inflate(R.menu.main, menu); // main
@@ -89,40 +98,33 @@ public class SearchFragment extends Fragment {
                 }catch (IndexOutOfBoundsException e){
                     e.printStackTrace();
                 }
-
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-//                FirebaseFirestore db = FirebaseFirestore.getInstance();// 파이어베이스 데이터베이스 연동
-//                if(flag || newText.equals(""))
-//                    db.collection(select_area).orderBy("name"). // 파이어베이스에서 Danbi01 collection을 연결한다.
-//                                                                // 단비 앱에서 지역선택 부분, 우리 앱에서는 필요없음
-//                            get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                                    if (task.isSuccessful()){
-//                                        hotDealArrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화시켜줌.
-//                                        for (QueryDocumentSnapshot document : task.getResult()){
-//                                            HotDeal hotDeal = document.toObject(HotDeal.class);
-//                                            hotDealArrayList.add(hotDeal); //데이터를 배열리스트에 담아 리사이클러 뷰로 보낼 준비
-//                                            Log.d("ClinicList", document.getId() + "=>" + document.getData());
-//
-//                                            // adapter.notifyDataSetChanged();
-//                                            flag =false;
-//
-//                                        }
-//                                        //리스트 저장 및 새로고침
-//
-//                                    } else {
-//                                        Log.w("ClinicList", "Error getting documents.", task.getException());
-//                                    }
-//                                }
-//                            });
-//                return true;
-
-                return false;
+                FirebaseFirestore db = FirebaseFirestore.getInstance();// 파이어베이스 데이터베이스 연동
+                String platName = "steamDB";
+                // 이러면 steamDB 밖에 못 불러오나??
+                // 험블번들, ms store 같이 불러올 방법 생각해봐야함
+                if(flag || newText.equals(""))
+                    db.collection(platName).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()){
+                                hotDealArrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화시켜줌.
+                                for (QueryDocumentSnapshot document : task.getResult()){
+                                    HotDeal hotDeal = document.toObject(HotDeal.class);
+                                    hotDealArrayList.add(hotDeal); //데이터를 배열리스트에 담아 리사이클러 뷰로 보낼 준비
+                                    Log.d("ClinicList", document.getId() + "=>" + document.getData());
+                                }
+                                mAdapter.notifyDataSetChanged(); //리스트 저장 및 새로고침
+                            } else {
+                                Log.w("ClinicList", "Error getting documents.", task.getException());
+                            }
+                        }
+                    });
+                return true;
             }
         });
 
