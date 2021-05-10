@@ -5,4 +5,5 @@
     <item name="text_version" type="id" />
     <item name="text_hotdeal" type="id" />
     <item name="main_hotdeal_img" type="id" />
+    <item name="button_search" type="id" />
 </resources>

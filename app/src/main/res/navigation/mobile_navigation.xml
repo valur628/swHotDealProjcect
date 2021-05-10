@@ -23,4 +23,10 @@
         android:label="@string/title_setting"
         tools:layout="@layout/fragment_setting" />
 
+    <fragment
+        android:id="@+id/navigation_menu"
+        android:name="com.GnuApp.swhotdeal.ui.hotdeal.MenuFragment"
+        android:label="Menu"
+        tools:layout="@layout/fragment_menu" />
+
 </navigation>
