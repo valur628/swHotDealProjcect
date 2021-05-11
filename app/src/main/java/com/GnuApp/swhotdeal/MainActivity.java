@@ -2,6 +2,7 @@ package com.GnuApp.swhotdeal;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.MenuItem;
@@ -45,17 +46,16 @@ public class MainActivity extends AppCompatActivity {
         String TAG = "MainActivity";
         String beforeString = "";
 
-//        activity = this;
-//        hotDealArrayList = new ArrayList<HotDeal>();
-//        layoutManager = new LinearLayoutManager(activity);
-//        recyclerView = findViewById(R.id.hotdeal_recycler);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(layoutManager);
-        // recyclerView를 만들긴 했는데 어떻게 다룰지 안 만듦.
-        // recyclerView를 다루기 위한 어댑터를 만들자!
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavi);
         getSupportFragmentManager().beginTransaction().add(R.id.main_frame,new HotdealFragment()).commit();
+
+        Button button = (Button) findViewById(R.id.button_search);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

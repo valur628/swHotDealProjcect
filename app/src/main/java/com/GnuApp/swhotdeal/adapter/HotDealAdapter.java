@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class HotDealAdapter extends RecyclerView.Adapter<HotDealAdapter.HotDealHolder> {
 
-    private final ArrayList<HotDeal> mHotDeal;
+    private ArrayList<HotDeal> mHotDeal;
     private HotDealHolder hotDealHolder;
 
     public static class HotDealHolder extends RecyclerView.ViewHolder {
@@ -60,10 +60,10 @@ public class HotDealAdapter extends RecyclerView.Adapter<HotDealAdapter.HotDealH
         // contents of the view with that element
         HotDeal hotDeal = mHotDeal.get(position);
 
-        int disPrice = hotDeal.getDisPrice();
-        int cost = hotDeal.getCost();
+        String disPrice = hotDeal.getDisPrice();
+        String cost = hotDeal.getCost();
         String repPicture = hotDeal.getRepPicture();
-        // 플랫폼 이미지는 나중에 구현하자.
+        // 플랫폼 이미지는 나중에 구현하자. 경우의 수에 따라 로컬에서 불러오는 것으로? 1, 2, 3
 
         hotDealHolder.disPrice.setText(disPrice);
         hotDealHolder.cost.setText(cost);

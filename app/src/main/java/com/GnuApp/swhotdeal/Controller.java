@@ -18,12 +18,15 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 public class Controller {
-    
-    public void setTemporaryData(String platName, ArrayList<HotDeal> arrayList, SearchAdapter adapter){
+    FirebaseFirestore db;
 
+    public Controller(){
+    }
+
+    public void setTemporaryData(String platName, ArrayList<HotDeal> arrayList, SearchAdapter adapter){
     }
     
-    public void getFirebaseData(FirebaseFirestore db, String platName, ArrayList<HotDeal> arrayList, SearchAdapter adapter){
+    public void getFirebaseData(String platName, ArrayList<HotDeal> arrayList, SearchAdapter adapter){
         db.collection(platName).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -31,8 +34,8 @@ public class Controller {
                     arrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화시켜줌.
                     for (QueryDocumentSnapshot document : task.getResult()){
                         HotDeal hotDeal = document.toObject(HotDeal.class);
-                        arrayList.add(hotDeal); //데이터를 배열리스트에 담아 리사이클러 뷰로 보낼 준비
-                        Log.d("ClinicList", document.getId() + "=>" + document.getData());
+                        adapter.addItem(hotDeal); //데이터를 배열리스트에 담아 리사이클러 뷰로 보낼 준비
+                        Log.d("Hotdeal", document.getId() + "=>" + document.getData());
                     }
                     adapter.notifyDataSetChanged(); //리스트 저장 및 새로고침
                 } else {

@@ -19,8 +19,8 @@
     </SearchView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/hotdeal_recycler"
-        android:background="#FFFFFF"
+        android:id="@+id/search_recycler"
+        android:background="#008888"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

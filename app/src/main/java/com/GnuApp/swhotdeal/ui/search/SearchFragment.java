@@ -1,7 +1,5 @@
 package com.GnuApp.swhotdeal.ui.search;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,21 +9,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.GnuApp.swhotdeal.Controller;
-import com.GnuApp.swhotdeal.MainActivity;
 import com.GnuApp.swhotdeal.R;
-import com.GnuApp.swhotdeal.adapter.HotDealAdapter;
+import com.GnuApp.swhotdeal.adapter.OnSearchClickListener;
 import com.GnuApp.swhotdeal.data.HotDeal;
 import com.GnuApp.swhotdeal.adapter.SearchAdapter;
 
@@ -43,11 +36,11 @@ public class SearchFragment extends Fragment {
 
     ArrayList<HotDeal> hotDealArrayList;
     RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+//    RecyclerView.LayoutManager layoutManager;
+    LinearLayoutManager layoutManager;
     SearchView searchView;
-    SearchAdapter mAdapter;
+    SearchAdapter adapter;
     Controller controller;
-    boolean flag = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,48 +49,68 @@ public class SearchFragment extends Fragment {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_search, container, false);
 
-        hotDealArrayList = new ArrayList<HotDeal>();
-        layoutManager = new LinearLayoutManager(getActivity());
-        mAdapter = new SearchAdapter(hotDealArrayList);
-        recyclerView = rootView.findViewById(R.id.hotdeal_recycler);
+        hotDealArrayList = new ArrayList<>();
+        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        adapter = new SearchAdapter();
+        controller = new Controller();
+        recyclerView = rootView.findViewById(R.id.search_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(mAdapter);
+
         recyclerView.setHasFixedSize(true);
         searchView = rootView.findViewById(R.id.search_view);
 
-        return rootView;
-    }
+        HotDeal hot = new HotDeal();
+        adapter.addItem(new HotDeal("프로그람", 2077, 400000, 300000, 2500, "https://cs.gnu.ac.kr/cs/main.do", "경상대", "https://cs.gnu.ac.kr/csadmin/_Img/main_image/03.jpg", "https://cs.gnu.ac.kr/_Img/Layout/flogo.gif"));
+        adapter.addItem(hot);
+        adapter.addTemp();
+        recyclerView.setAdapter(adapter);
 
-    @Override
-    public void onCreateOptionsMenu(@NotNull Menu menu, MenuInflater inflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+//        adapter.setOnItemClickListener(new OnSearchClickListener() {
+//            @Override
+//            public void OnItemClick(View.OnClickListener onClickListener, View view, int position) {
+//                HotDeal item = adapter.getItem(position);
+//
+//                Toast.makeText(getActivity(), "아이템 선택됨: " + item.getSWName(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+//        아이템 클릭시 판매 사이트로 넘어감
 
-        inflater.inflate(R.menu.main, menu); // main
-        MenuItem menuItem = menu.findItem(R.id.hotdeal_list_relative); // search
-
-        SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                String[] strings;
-                strings = query.split(" ");
-                int size = mAdapter.getItemCount();
+                Log.d("onQueryTextChange", hotDealArrayList.toString());
+                Log.d("search", "nothing");
+                String[] stringArray;
+                Log.d("onQueryTextSubmit", hotDealArrayList.toString());
+                Log.d("search", hotDealArrayList.toString());
+                Log.d("search", query);
 
+                stringArray = query.split(" ");
+                int size = hotDealArrayList.size();
                 try {
-                    for(int i = 0 ; i < size ; i++){
-                        for(String s : strings){
-                            if(s.length() > 0 &&s.charAt(0) == '#'){
-                                if(hotDealArrayList.get(i).getSWName().contains(s.substring(1))) { continue; }
+                    for (int i = 0; i < size; i++) {
+                        for (String s : stringArray) {
+                            if (hotDealArrayList.get(i).getSWName().contains(s.substring(1))) {
+                                continue;
                             }
                             hotDealArrayList.remove(i);
-
-                            if(size > 0) size--;
-                            if(i > 0) i--;
+                            if (size > 0)
+                                size--;
+                            if (i > 0)
+                                i--;
                         }
                     }
-                }catch (IndexOutOfBoundsException e){
+                } catch (IndexOutOfBoundsException e) {
                     e.printStackTrace();
                 }
+
+                Log.d("arrayList2", hotDealArrayList.toString());
+
+                adapter.notifyDataSetChanged();
+
+                for (int i = 0; i < hotDealArrayList.size(); i++)
+                    Log.d("onclick", hotDealArrayList.get(i).getSWName());
+
                 return true;
             }
 
@@ -107,27 +120,26 @@ public class SearchFragment extends Fragment {
                 String platName = "steamDB";
                 // 이러면 steamDB 밖에 못 불러오나??
                 // 험블번들, ms store 같이 불러올 방법 생각해봐야함
-                if(flag || newText.equals(""))
+                if (newText.equals(""))
                     db.collection(platName).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 hotDealArrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화시켜줌.
-                                for (QueryDocumentSnapshot document : task.getResult()){
+                                for (QueryDocumentSnapshot document : task.getResult()) {
                                     HotDeal hotDeal = document.toObject(HotDeal.class);
                                     hotDealArrayList.add(hotDeal); //데이터를 배열리스트에 담아 리사이클러 뷰로 보낼 준비
-                                    Log.d("ClinicList", document.getId() + "=>" + document.getData());
+                                    Log.d("SearchFragment", document.getId() + "=>" + document.getData());
                                 }
-                                mAdapter.notifyDataSetChanged(); //리스트 저장 및 새로고침
+                                adapter.notifyDataSetChanged();
                             } else {
-                                Log.w("ClinicList", "Error getting documents.", task.getException());
+                                Log.w("SearchFragment", "Error getting documents.", task.getException());
                             }
                         }
                     });
                 return true;
             }
         });
-
-        super.onCreateOptionsMenu(menu, inflater);
+    return rootView;
     }
 }

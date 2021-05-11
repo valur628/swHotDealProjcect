@@ -1,7 +1,5 @@
 package com.GnuApp.swhotdeal.data;
 
-import com.GnuApp.swhotdeal.R;
-
 // 리사이클러 뷰 사용하기 위한 데이터, get
 public class HotDeal {
     private int loadNumber; // 갱신순서
@@ -17,7 +15,7 @@ public class HotDeal {
     private String repPicture; // 대표사진
     private String othPicture; // 기타사진
 
-    public HotDeal(){
+    public HotDeal() {
         this.setSWName("tempSWName");
         this.setDisPeriod(20991231);
         this.setCost(999900);
@@ -29,14 +27,25 @@ public class HotDeal {
         this.setOthPicture("https://newgh.gnu.ac.kr/common/images/T1_layout/logo.png");
     }
     // 파이어베이스에서 임시로 받아올 것.
-    // 생성자로 기본 자료 셋팅은 위험할듯
+
+    public HotDeal(String swName, int disPeriod, int cost, int disPrice, int disRate, String platAddress, String platName, String repPicture, String othPicture) {
+        this.setSWName(swName);
+        this.setDisPeriod(disPeriod);
+        this.setCost(cost);
+        this.setDisPrice(disPrice);
+        this.setDisRate(disRate);
+        this.setPlatAddress(platAddress);
+        this.setPlatName(platName);
+        this.setRepPicture(repPicture);
+        this.setOthPicture(othPicture);
+    }
 
     public String getSWName() { return swName; }
     public void setSWName(String swName) { this.swName = swName; }
 
 //    public String getDevName() { return devName; }
 //    public void setDevName(String devName) { this.devName = devName; }
-    // 21. 4. 27. 회의 devname 제외
+//    // 21. 4. 27. 회의 devname 제외
 
     public int getDisPeriod() { return disPeriod; }
     public void setDisPeriod(int disPeriod) { this.disPeriod = disPeriod; }
@@ -44,16 +53,16 @@ public class HotDeal {
     public String getCurrency() { return currency; }
     public void setCurrency(String currency) { this.currency = currency; }
 
-    public int getCost() { return cost; }
+    public String getCost() { return String.valueOf(cost); }
     public void setCost(int cost) { this.cost = cost / 100; }
 
-    public int getDisPrice() { return disPrice; }
+    public String getDisPrice() { return String.valueOf(disPrice); }
     public void setDisPrice(int disPrice) { this.disPrice = disPrice / 100; }
 
     public int getDisRate() { return disRate; }
     public void setDisRate(int disRate) { this.disRate = disRate / 100; }
     // 할인율 서버에서 받아옴
-    
+
     public String getPlatAddress() { return platAddress; }
     public void setPlatAddress(String platAddress) { this.platAddress = platAddress; }
 

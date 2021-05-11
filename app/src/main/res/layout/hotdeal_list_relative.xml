@@ -6,60 +6,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/img_rep_pic"
-        android:layout_width="240dp"
-        android:layout_height="135dp"
-        android:layout_alignParentStart="true"
-        android:contentDescription="@string/rep_picture"
-        android:gravity="center"
-        android:visibility="visible"
-        app:srcCompat="@drawable/img_sw_none" />
+<!--    <ImageView-->
+<!--        android:id="@+id/img_rep_pic"-->
+<!--        android:layout_width="240dp"-->
+<!--        android:layout_height="135dp"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:contentDescription="@string/rep_picture"-->
+<!--        android:gravity="center"-->
+<!--        android:visibility="visible"-->
+<!--        app:srcCompat="@drawable/img_sw_none" />-->
 
-    <TextView
-        android:id="@+id/text_sw_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/img_rep_pic"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/img_rep_pic"
-        android:text="@string/sw_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+<!--    <TextView-->
+<!--        android:id="@+id/text_sw_name"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignTop="@+id/img_rep_pic"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_toEndOf="@+id/img_rep_pic"-->
+<!--        android:text="@string/sw_name"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />-->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/text_sw_name"
-        android:layout_alignBottom="@+id/img_rep_pic"
-        android:layout_toStartOf="@+id/img_plat"
-        android:layout_toEndOf="@+id/img_rep_pic"
-        android:gravity="center"
-        android:orientation="vertical">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_below="@+id/text_sw_name"-->
+<!--        android:layout_alignBottom="@+id/img_rep_pic"-->
+<!--        android:layout_toStartOf="@+id/img_plat"-->
+<!--        android:layout_toEndOf="@+id/img_rep_pic"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="vertical">-->
 
-        <TextView
-            android:id="@+id/text_dis_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginBottom="0dp"
-            android:text="@string/dis_price" />
+<!--        <TextView-->
+<!--            android:id="@+id/text_dis_price"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="0dp"-->
+<!--            android:layout_marginBottom="0dp"-->
+<!--            android:text="@string/dis_price" />-->
 
-        <TextView
-            android:id="@+id/text_cost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginBottom="0dp"
-            android:text="@string/cost" />
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/text_cost"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="0dp"-->
+<!--            android:layout_marginBottom="0dp"-->
+<!--            android:text="@string/cost" />-->
+<!--    </LinearLayout>-->
 
-    <ImageView
-        android:id="@+id/img_plat"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/text_sw_name"
-        android:layout_alignBottom="@+id/img_rep_pic"
-        android:layout_alignParentEnd="true"
-        android:contentDescription="@string/img_plat"
-        app:srcCompat="@drawable/img_esd_none" />
+<!--    <ImageView-->
+<!--        android:id="@+id/img_plat"-->
+<!--        android:layout_width="80dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/text_sw_name"-->
+<!--        android:layout_alignBottom="@+id/img_rep_pic"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:contentDescription="@string/img_plat"-->
+<!--        app:srcCompat="@drawable/img_esd_none" />-->
 </RelativeLayout>
