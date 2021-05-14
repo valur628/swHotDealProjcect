@@ -54,10 +54,10 @@ public class HotDeal {
     }
 
     public HotDeal(int DB_Cost, String DB_Currency, String DB_DevName, int DB_DisPeriod, int DB_DisPrice, int DB_DisRate, int DB_LoadNumber, String DB_OthPicture, String DB_PlatAddress, String DB_PlatName, String DB_RepPicture, String DB_SWName){
-        this.setCost(DB_Cost);
+        this.setCost(DB_Cost / 100);
         this.setCurrency(DB_Currency);
         this.setDisPeriod(DB_DisPeriod);
-        this.setDisPrice(DB_DisPrice);
+        this.setDisPrice(DB_DisPrice / 100);
         this.setDisRate(DB_DisRate);
         this.setOthPicture(DB_OthPicture);
         this.setPlatAddress(DB_PlatAddress);

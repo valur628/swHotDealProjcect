@@ -63,7 +63,7 @@ public class SearchFragment extends Fragment {
         HotDeal hot = new HotDeal();
         adapter.addItem(new HotDeal("프로그람", 2077, 400000, 300000, 2500, "https://cs.gnu.ac.kr/cs/main.do", "경상대", "https://cs.gnu.ac.kr/csadmin/_Img/main_image/03.jpg", "https://cs.gnu.ac.kr/_Img/Layout/flogo.gif"));
         //adapter.addItem(new HotDeal("program", 2066, 500000, 400000, 2000, "https://naver.com", "네이버", "https://newgh.gnu.ac.kr/common/images/T1_layout/logo.png", "https://newgh.gnu.ac.kr/common/images/T1_layout/logo.png"));
-        adapter.addItem(hot);
+        //adapter.addItem(hot);
         getFirebaseData(hotDealArrayList, adapter);
 
         //adapter.addTemp(); // 여기서 추가하는 곳은 SearchAdapter의 mHotDeal
@@ -78,11 +78,14 @@ public class SearchFragment extends Fragment {
 //            }
 //        });
 //        아이템 클릭시 판매 사이트로 넘어감
+//        작동 안됨 SearchFrag의 hotDealArrayList
+//        실제로 저장되는 곳은 SearchAdapter의 mHotDeal
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.d("onQueryTextChange", hotDealArrayList.toString()); // 여기서 검색하는 곳은 SearchFrag의 hotDealArrayList
+                                                                                // 하지만 실제로 저장되는 곳은 SearchAdapter의 mHotDeal
                 Log.d("search", "nothing");
                 String[] stringArray;
                 Log.d("onQueryTextSubmit", hotDealArrayList.toString());
@@ -155,9 +158,12 @@ public class SearchFragment extends Fragment {
                     for (QueryDocumentSnapshot document : task.getResult()){
                         HotDeal hotDeal = document.toObject(HotDeal.class);
                         Log.d("getFireBaseData", document.getId());
-                        adapter.addItem(hotDeal); //데이터를 배열리스트에 담아 리사이클러 뷰로 보낼 준비
+                        // adapter.addItem(hotDeal); //데이터를 ArrayList에 담아 리사이클러뷰의 mHotdeal로 보냄
+                        arrayList.add(hotDeal);
+//                        adapter.setItems(hotDeal);
                         Log.d("Hotdeal", document.getId() + "=>" + document.getData());
                     }
+                    adapter.setItems(arrayList);
                     adapter.notifyDataSetChanged(); //리스트 저장 및 새로고침
                 } else {
                     Log.w("", "Error getting documents.", task.getException());

@@ -123,18 +123,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
     }
     // 리사이클러 뷰에 아이템 추가
 
-    public void addTemp() {
-        HotDeal item = new HotDeal();
-        Log.d("HotDeal()", "addTemp: 생성자");
-        mHotDeal.add(item);
-    }
-
-    public void addDBData() {
-        HotDeal item = new HotDeal();
-        Log.d("HotDeal()", "addTemp: 생성자");
-        mHotDeal.add(item);
-    }
-
     public void setItems(ArrayList<HotDeal> mHotDeal) {
         this.mHotDeal = mHotDeal;
     }
@@ -143,7 +131,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
         return mHotDeal.get(position);
     }
 
-    public void setItems(int position, HotDeal item){
+    public void setItem(int position, HotDeal item){
         mHotDeal.set(position, item);
     }
 
