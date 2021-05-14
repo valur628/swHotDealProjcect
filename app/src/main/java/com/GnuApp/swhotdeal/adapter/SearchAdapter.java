@@ -29,7 +29,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
     Context context;
     OnSearchClickListener listener;
 
-    public static class SearchHolder extends RecyclerView.ViewHolder {
+    public class SearchHolder extends RecyclerView.ViewHolder {
 
         public TextView swName;
         public TextView disPrice;
@@ -67,7 +67,19 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
             disPrice.setText(hotDeal.getDisPrice());
             cost.setText(hotDeal.getCost());
             Glide.with(itemView).load(hotDeal.getRepPicture()).into(repPicture);
-            Glide.with(itemView).load(R.drawable.steam).into(imgPlat);
+
+            String platName = hotDeal.getPlatName();
+//            Log.d("sss" , String.valueOf(platName.equals("Steam"))); 에러 발생 Yoda conditions
+            Log.d("platName" , hotDeal.getSWName() + ": " + String.valueOf("Steam".equals(platName)));
+
+            if ("Steam".equals(platName)) {
+                Glide.with(itemView).load(R.drawable.steam).into(imgPlat);
+            } else if ("HumbleBundle".equals(platName)) {
+                Glide.with(itemView).load(R.drawable.logo_humble_bundle).into(imgPlat);
+            }
+            else {
+                Glide.with(itemView).load(R.drawable.img_esd_none).into(imgPlat);
+            }
         }
     }
 
@@ -109,8 +121,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
     public void addItem(HotDeal item) {
         mHotDeal.add(item);
     }
+    // 리사이클러 뷰에 아이템 추가
 
     public void addTemp() {
+        HotDeal item = new HotDeal();
+        Log.d("HotDeal()", "addTemp: 생성자");
+        mHotDeal.add(item);
+    }
+
+    public void addDBData() {
         HotDeal item = new HotDeal();
         Log.d("HotDeal()", "addTemp: 생성자");
         mHotDeal.add(item);

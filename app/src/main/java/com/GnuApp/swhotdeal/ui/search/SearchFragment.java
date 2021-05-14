@@ -41,6 +41,7 @@ public class SearchFragment extends Fragment {
     SearchView searchView;
     SearchAdapter adapter;
     Controller controller;
+    FirebaseFirestore db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,8 +62,11 @@ public class SearchFragment extends Fragment {
 
         HotDeal hot = new HotDeal();
         adapter.addItem(new HotDeal("프로그람", 2077, 400000, 300000, 2500, "https://cs.gnu.ac.kr/cs/main.do", "경상대", "https://cs.gnu.ac.kr/csadmin/_Img/main_image/03.jpg", "https://cs.gnu.ac.kr/_Img/Layout/flogo.gif"));
+        //adapter.addItem(new HotDeal("program", 2066, 500000, 400000, 2000, "https://naver.com", "네이버", "https://newgh.gnu.ac.kr/common/images/T1_layout/logo.png", "https://newgh.gnu.ac.kr/common/images/T1_layout/logo.png"));
         adapter.addItem(hot);
-        adapter.addTemp();
+        getFirebaseData(hotDealArrayList, adapter);
+
+        //adapter.addTemp(); // 여기서 추가하는 곳은 SearchAdapter의 mHotDeal
         recyclerView.setAdapter(adapter);
 
 //        adapter.setOnItemClickListener(new OnSearchClickListener() {
@@ -78,7 +82,7 @@ public class SearchFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Log.d("onQueryTextChange", hotDealArrayList.toString());
+                Log.d("onQueryTextChange", hotDealArrayList.toString()); // 여기서 검색하는 곳은 SearchFrag의 hotDealArrayList
                 Log.d("search", "nothing");
                 String[] stringArray;
                 Log.d("onQueryTextSubmit", hotDealArrayList.toString());
@@ -117,11 +121,8 @@ public class SearchFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();// 파이어베이스 데이터베이스 연동
-                String platName = "steamDB";
-                // 이러면 steamDB 밖에 못 불러오나??
-                // 험블번들, ms store 같이 불러올 방법 생각해봐야함
                 if (newText.equals(""))
-                    db.collection(platName).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    db.collection("ScrapingDB").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
@@ -141,5 +142,27 @@ public class SearchFragment extends Fragment {
             }
         });
     return rootView;
+    }
+    
+    // 함수 실행하면 안됨
+    public void getFirebaseData(ArrayList<HotDeal> arrayList, SearchAdapter adapter){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();// 파이어베이스 데이터베이스 연동
+        db.collection("ScrapingDB").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    arrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화시켜줌.
+                    for (QueryDocumentSnapshot document : task.getResult()){
+                        HotDeal hotDeal = document.toObject(HotDeal.class);
+                        Log.d("getFireBaseData", document.getId());
+                        adapter.addItem(hotDeal); //데이터를 배열리스트에 담아 리사이클러 뷰로 보낼 준비
+                        Log.d("Hotdeal", document.getId() + "=>" + document.getData());
+                    }
+                    adapter.notifyDataSetChanged(); //리스트 저장 및 새로고침
+                } else {
+                    Log.w("", "Error getting documents.", task.getException());
+                }
+            }
+        });
     }
 }
