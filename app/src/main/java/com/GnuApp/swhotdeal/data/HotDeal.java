@@ -14,11 +14,11 @@ public class HotDeal {
     @PropertyName("DB_Currency")
     private String currency; // 통화
     @PropertyName("DB_Cost")
-    private int cost; // 원가
+    private float cost; // 원가
     @PropertyName("DB_DisPrice")
-    private int disPrice; // 할인가
+    private float disPrice; // 할인가
     @PropertyName("DB_DisRate")
-    private int disRate; // 할인율
+    private float disRate; // 할인율
     @PropertyName("DB_PlatAddress")
     private String platAddress; // 플랫폼 주소, 판매처 링크
     @PropertyName("DB_PlatName")
@@ -29,17 +29,9 @@ public class HotDeal {
     private String othPicture; // 기타사진
 
     public HotDeal() {
-//        this.setSWName("tempSWName");
-//        this.setDisPeriod(20991231);
-//        this.setCost(999900);
-//        this.setDisPrice(666600);
-//        this.setDisRate(3300);
-//        this.setPlatAddress("https://gnu.ac.kr/main/");
-//        this.setPlatName("GNU");
-//        this.setRepPicture("https://www.gnu.ac.kr/img/main/logo_N.gif");
-//        this.setOthPicture("https://newgh.gnu.ac.kr/common/images/T1_layout/logo.png");
+        setDivide100();
     }
-    // 파이어베이스에서 임시로 받아올 것.
+    // 파이어베이스에서 받아온 데이터 객체로 바꿀때 사용.
 
     public HotDeal(String swName, int disPeriod, int cost, int disPrice, int disRate, String platAddress, String platName, String repPicture, String othPicture) {
         this.setSWName(swName);
@@ -53,17 +45,23 @@ public class HotDeal {
         this.setOthPicture(othPicture);
     }
 
-    public HotDeal(int DB_Cost, String DB_Currency, String DB_DevName, int DB_DisPeriod, int DB_DisPrice, int DB_DisRate, int DB_LoadNumber, String DB_OthPicture, String DB_PlatAddress, String DB_PlatName, String DB_RepPicture, String DB_SWName){
-        this.setCost(DB_Cost / 100);
-        this.setCurrency(DB_Currency);
-        this.setDisPeriod(DB_DisPeriod);
-        this.setDisPrice(DB_DisPrice / 100);
-        this.setDisRate(DB_DisRate);
-        this.setOthPicture(DB_OthPicture);
-        this.setPlatAddress(DB_PlatAddress);
-        this.setPlatName(DB_PlatName);
-        this.setRepPicture(DB_RepPicture);
-        this.setSWName(DB_SWName);
+//    public HotDeal(int DB_Cost, String DB_Currency, String DB_DevName, int DB_DisPeriod, int DB_DisPrice, int DB_DisRate, int DB_LoadNumber, String DB_OthPicture, String DB_PlatAddress, String DB_PlatName, String DB_RepPicture, String DB_SWName){
+//        this.setCost((DB_Cost / 100));
+//        this.setCurrency(DB_Currency);
+//        this.setDisPeriod(DB_DisPeriod);
+//        this.setDisPrice((DB_DisPrice / 100));
+//        this.setDisRate(DB_DisRate);
+//        this.setOthPicture(DB_OthPicture);
+//        this.setPlatAddress(DB_PlatAddress);
+//        this.setPlatName(DB_PlatName);
+//        this.setRepPicture(DB_RepPicture);
+//        this.setSWName(DB_SWName);
+//    }
+
+    public void setDivide100() {
+        setCost(this.cost);
+        setDisPrice(this.disPrice);
+        setDisRate(this.disRate);
     }
 
     @PropertyName("DB_SWName")
@@ -85,15 +83,15 @@ public class HotDeal {
 
     @PropertyName("DB_Cost")
     public String getCost() { return String.valueOf(cost); }
-    public void setCost(int cost) { this.cost = cost / 100; }
+    public void setCost(float cost) { this.cost = cost / 100; }
 
     @PropertyName("DB_DisPrice")
     public String getDisPrice() { return String.valueOf(disPrice); }
-    public void setDisPrice(int disPrice) { this.disPrice = disPrice / 100; }
+    public void setDisPrice(float disPrice) { this.disPrice = disPrice / 100; }
 
     @PropertyName("DB_DisRate")
-    public int getDisRate() { return disRate; }
-    public void setDisRate(int disRate) { this.disRate = disRate / 100; }
+    public String getDisRate() { return String.valueOf(disRate); }
+    public void setDisRate(float disRate) { this.disRate = disRate / 100; }
     // 할인율 서버에서 받아옴
 
     @PropertyName("DB_PlatAddress")

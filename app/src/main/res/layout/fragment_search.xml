@@ -12,9 +12,10 @@
         android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="@drawable/corner"
         app:iconifiedByDefault="false"
-        app:queryHint="소프트웨어를 검색">
+        app:queryBackground="@drawable/corner"
+        app:queryHint="소프트웨어 검색">
 
     </SearchView>
 

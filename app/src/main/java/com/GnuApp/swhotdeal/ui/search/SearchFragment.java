@@ -97,7 +97,7 @@ public class SearchFragment extends Fragment {
                 try {
                     for (int i = 0; i < size; i++) {
                         for (String s : stringArray) {
-                            if (hotDealArrayList.get(i).getSWName().contains(s.substring(1))) {
+                            if (hotDealArrayList.get(i).getSWName().toLowerCase().contains(s.substring(1))) { // toLowerCase추가
                                 continue;
                             }
                             hotDealArrayList.remove(i);
@@ -146,8 +146,7 @@ public class SearchFragment extends Fragment {
         });
     return rootView;
     }
-    
-    // 함수 실행하면 안됨
+
     public void getFirebaseData(ArrayList<HotDeal> arrayList, SearchAdapter adapter){
         FirebaseFirestore db = FirebaseFirestore.getInstance();// 파이어베이스 데이터베이스 연동
         db.collection("ScrapingDB").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -157,6 +156,7 @@ public class SearchFragment extends Fragment {
                     arrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화시켜줌.
                     for (QueryDocumentSnapshot document : task.getResult()){
                         HotDeal hotDeal = document.toObject(HotDeal.class);
+                        hotDeal.setDivide100();
                         Log.d("getFireBaseData", document.getId());
                         // adapter.addItem(hotDeal); //데이터를 ArrayList에 담아 리사이클러뷰의 mHotdeal로 보냄
                         arrayList.add(hotDeal);
