@@ -13,12 +13,9 @@
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-    </style>
-
-    <style name="Theme.SwHotDeal.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <!-- Customize your theme here. -->
     </style>
 
     <style name="Theme.SwHotDeal.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

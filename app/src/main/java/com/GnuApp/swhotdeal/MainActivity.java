@@ -1,22 +1,18 @@
 package com.GnuApp.swhotdeal;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
 
 import com.GnuApp.swhotdeal.data.HotDeal;
 import com.GnuApp.swhotdeal.ui.hotdeal.HotdealFragment;
@@ -36,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 //    RecyclerView recyclerView;
 //    RecyclerView.LayoutManager layoutManager;
 
-    TextView maintitle;
+    static final String[] HOTDEAL_LIST = new String[50];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
