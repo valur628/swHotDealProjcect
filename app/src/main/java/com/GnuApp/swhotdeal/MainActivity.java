@@ -8,7 +8,13 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
+
+import com.GnuApp.swhotdeal.data.HotDeal;
 import com.GnuApp.swhotdeal.ui.hotdeal.HotdealFragment;
 import com.GnuApp.swhotdeal.ui.search.SearchFragment;
 import com.GnuApp.swhotdeal.ui.setting.SettingFragment;
@@ -20,11 +26,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_MENU = 101;
 
-    Activity activity;
-    Button searchButton;
-    ArrayList<HotDeal> hotDealArrayList;
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+//    Activity activity;
+//    Button searchButton;
+//    ArrayList<HotDeal> hotDealArrayList;
+//    RecyclerView recyclerView;
+//    RecyclerView.LayoutManager layoutManager;
 
     static final String[] HOTDEAL_LIST = new String[50];
 
@@ -37,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         String beforeString = "";
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavi);
-
         getSupportFragmentManager().beginTransaction().add(R.id.main_frame,new HotdealFragment()).commit();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

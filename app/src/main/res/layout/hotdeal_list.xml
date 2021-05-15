@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
 
     <LinearLayout
         android:id="@+id/hotdeal_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/corner"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/img_rep_pic"
             android:layout_width="213dp"
-            android:layout_height="120dp"
+            android:layout_height="match_parent"
             app:srcCompat="@drawable/img_sw_none" />
 
         <LinearLayout
@@ -26,8 +32,9 @@
             android:gravity="center"
             android:orientation="vertical">
 
+
             <TextView
-                android:id="@+id/id_sw_name"
+                android:id="@+id/text_sw_name"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="소프트웨어 이름"
@@ -47,13 +54,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/id_cost"
+                        android:id="@+id/text_cost"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="원가" />
 
                     <TextView
-                        android:id="@+id/id_dis_price"
+                        android:id="@+id/text_dis_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="할인가" />
