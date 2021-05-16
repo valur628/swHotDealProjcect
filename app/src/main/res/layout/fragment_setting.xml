@@ -16,6 +16,7 @@
         android:textAlignment="center"
         android:textSize="200dp"
         android:text="설정"
+        android:textColor="#FF0000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
