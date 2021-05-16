@@ -61,9 +61,9 @@ public class SearchFragment extends Fragment {
         searchView = rootView.findViewById(R.id.search_view);
 
         HotDeal hot = new HotDeal();
-        adapter.addItem(new HotDeal("프로그람", 2077, 400000, 300000, 2500, "https://cs.gnu.ac.kr/cs/main.do", "경상대", "https://cs.gnu.ac.kr/csadmin/_Img/main_image/03.jpg", "https://cs.gnu.ac.kr/_Img/Layout/flogo.gif"));
-        //adapter.addItem(new HotDeal("program", 2066, 500000, 400000, 2000, "https://naver.com", "네이버", "https://newgh.gnu.ac.kr/common/images/T1_layout/logo.png", "https://newgh.gnu.ac.kr/common/images/T1_layout/logo.png"));
-        //adapter.addItem(hot);
+        // adapter.addItem(new HotDeal("프로그람", 2077, 400000, 300000, 2500, "https://cs.gnu.ac.kr/cs/main.do", "경상대", "https://cs.gnu.ac.kr/csadmin/_Img/main_image/03.jpg", "https://cs.gnu.ac.kr/_Img/Layout/flogo.gif"));
+        // adapter.addItem(new HotDeal("program", 2066, 500000, 400000, 2000, "https://naver.com", "네이버", "https://newgh.gnu.ac.kr/common/images/T1_layout/logo.png", "https://newgh.gnu.ac.kr/common/images/T1_layout/logo.png"));
+        // adapter.addItem(hot);
         getFirebaseData(hotDealArrayList, adapter);
 
         //adapter.addTemp(); // 여기서 추가하는 곳은 SearchAdapter의 mHotDeal

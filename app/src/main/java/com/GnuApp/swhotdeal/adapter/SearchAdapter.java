@@ -1,6 +1,8 @@
 package com.GnuApp.swhotdeal.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Paint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,16 +64,22 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
             });
         }
 
+        @SuppressLint("SetTextI18n")
         public void setItem(HotDeal hotDeal) {
             swName.setText(hotDeal.getSWName());
-            disPrice.setText(hotDeal.getDisPrice());
-            cost.setText(hotDeal.getCost());
             Glide.with(itemView).load(hotDeal.getRepPicture()).into(repPicture);
 
-            String platName = hotDeal.getPlatName();
-//            Log.d("sss" , String.valueOf(platName.equals("Steam"))); 에러 발생 Yoda conditions
-            Log.d("platName" , hotDeal.getSWName() + ": " + String.valueOf("Steam".equals(platName)));
+            String currency = hotDeal.getCurrency();
+            if ("KRW".equals(currency)) {
+                disPrice.setText("₩ "+hotDeal.getDisPrice());
+                cost.setText("₩ "+hotDeal.getCost());
+            } else if ("USD".equals(currency)) {
+                disPrice.setText("$ "+hotDeal.getDisPrice());
+                cost.setText("$ "+hotDeal.getCost());
+            }
+            cost.setPaintFlags(cost.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
 
+            String platName = hotDeal.getPlatName();
             if ("Steam".equals(platName)) {
                 Glide.with(itemView).load(R.drawable.steam).into(imgPlat);
             } else if ("HumbleBundle".equals(platName)) {
