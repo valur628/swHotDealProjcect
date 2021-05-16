@@ -34,6 +34,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
         public TextView swName;
         public TextView disPrice;
         public TextView cost;
+        public TextView disrate;
         public ImageView repPicture;
         public ImageView imgPlat;
 
@@ -42,6 +43,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
             this.swName = itemView.findViewById(R.id.text_sw_name);
             this.disPrice = itemView.findViewById(R.id.text_dis_price);
             this.cost = itemView.findViewById(R.id.text_cost);
+            this.disrate = itemView.findViewById(R.id.text_disrate);
             this.repPicture = itemView.findViewById(R.id.img_rep_pic);
             this.imgPlat = itemView.findViewById(R.id.img_plat);
 
@@ -66,6 +68,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
             swName.setText(hotDeal.getSWName());
             disPrice.setText(hotDeal.getDisPrice());
             cost.setText(hotDeal.getCost());
+            disrate.setText(hotDeal.getDisRate());
             Glide.with(itemView).load(hotDeal.getRepPicture()).into(repPicture);
 
             String platName = hotDeal.getPlatName();

@@ -19,7 +19,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.GnuApp.swhotdeal.Controller;
 import com.GnuApp.swhotdeal.R;
 import com.GnuApp.swhotdeal.adapter.OnSearchClickListener;
 import com.GnuApp.swhotdeal.data.HotDeal;
@@ -41,7 +40,6 @@ public class HotdealFragment extends Fragment {
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     SearchAdapter adapter;
-    Controller controller;
     FirebaseFirestore db;
     FragmentManager manager;
 
@@ -56,7 +54,6 @@ public class HotdealFragment extends Fragment {
         hotDealArrayList = new ArrayList<>();
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         adapter = new SearchAdapter();
-        controller = new Controller();
         recyclerView = rootView.findViewById(R.id.hotdeal_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
