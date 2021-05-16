@@ -1,5 +1,6 @@
 package com.GnuApp.swhotdeal.ui.hotdeal;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,6 +43,7 @@ public class HotdealFragment extends Fragment {
     SearchAdapter adapter;
     FirebaseFirestore db;
     FragmentManager manager;
+    TextView main_cost;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +58,8 @@ public class HotdealFragment extends Fragment {
         adapter = new SearchAdapter();
         recyclerView = rootView.findViewById(R.id.hotdeal_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        main_cost = rootView.findViewById(R.id.main_cost);
+        main_cost.setPaintFlags(main_cost.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         recyclerView.setHasFixedSize(true);
 
         HotDeal hot = new HotDeal();

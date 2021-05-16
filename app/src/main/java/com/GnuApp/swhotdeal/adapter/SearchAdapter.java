@@ -1,6 +1,7 @@
 package com.GnuApp.swhotdeal.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
             this.disrate = itemView.findViewById(R.id.text_disrate);
             this.repPicture = itemView.findViewById(R.id.img_rep_pic);
             this.imgPlat = itemView.findViewById(R.id.img_plat);
+            cost.setPaintFlags(cost.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
