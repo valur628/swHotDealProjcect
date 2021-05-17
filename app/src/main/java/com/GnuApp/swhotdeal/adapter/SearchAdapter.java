@@ -3,18 +3,15 @@ package com.GnuApp.swhotdeal.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.GnuApp.swhotdeal.adapter.OnSearchClickListener;
 import com.bumptech.glide.Glide;
 
 // import com.GnuApp.swhotdeal.OnSearchClickListener;
@@ -23,29 +20,30 @@ import com.GnuApp.swhotdeal.data.HotDeal;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHolder> implements OnSearchClickListener {
 
-    ArrayList<HotDeal> mHotDeal = new ArrayList<HotDeal>();
+    ArrayList<HotDeal> mHotDeal = new ArrayList<>();
     Context context;
     OnSearchClickListener listener;
 
     public class SearchHolder extends RecyclerView.ViewHolder {
 
-        public TextView swName;
-        public TextView disPrice;
-        public TextView cost;
-        public ImageView repPicture;
-        public ImageView imgPlat;
+        public TextView TVswName;
+        public TextView TVdisPrice;
+        public TextView TVcost;
+        public ImageView IVrepPicture;
+        public ImageView IVimgPlat;
 
         public SearchHolder(View itemView, OnSearchClickListener listener) {
             super(itemView);
-            this.swName = itemView.findViewById(R.id.text_sw_name);
-            this.disPrice = itemView.findViewById(R.id.text_dis_price);
-            this.cost = itemView.findViewById(R.id.text_cost);
-            this.repPicture = itemView.findViewById(R.id.img_rep_pic);
-            this.imgPlat = itemView.findViewById(R.id.img_plat);
+            this.TVswName = itemView.findViewById(R.id.text_sw_name);
+            this.TVdisPrice = itemView.findViewById(R.id.text_dis_price);
+            this.TVcost = itemView.findViewById(R.id.text_cost);
+            this.IVrepPicture = itemView.findViewById(R.id.img_rep_pic);
+            this.IVimgPlat = itemView.findViewById(R.id.img_plat);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -66,27 +64,32 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
 
         @SuppressLint("SetTextI18n")
         public void setItem(HotDeal hotDeal) {
-            swName.setText(hotDeal.getSWName());
-            Glide.with(itemView).load(hotDeal.getRepPicture()).into(repPicture);
+            DecimalFormat df = new DecimalFormat("#.##");
+
+            TVswName.setText(hotDeal.getSWName());
+            Glide.with(itemView).load(hotDeal.getRepPicture()).into(IVrepPicture);
+
+            String cost = df.format(hotDeal.getCost());
+            String disPrice = df.format(hotDeal.getDisPrice());
 
             String currency = hotDeal.getCurrency();
             if ("KRW".equals(currency)) {
-                disPrice.setText("₩ "+hotDeal.getDisPrice());
-                cost.setText("₩ "+hotDeal.getCost());
+                TVdisPrice.setText("₩ "+cost);
+                TVcost.setText("₩ "+cost);
             } else if ("USD".equals(currency)) {
-                disPrice.setText("$ "+hotDeal.getDisPrice());
-                cost.setText("$ "+hotDeal.getCost());
+                TVdisPrice.setText("$ "+disPrice);
+                TVcost.setText("$ "+disPrice);
             }
-            cost.setPaintFlags(cost.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+            TVcost.setPaintFlags(TVcost.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
 
             String platName = hotDeal.getPlatName();
             if ("Steam".equals(platName)) {
-                Glide.with(itemView).load(R.drawable.steam).into(imgPlat);
+                Glide.with(itemView).load(R.drawable.steam).into(IVimgPlat);
             } else if ("HumbleBundle".equals(platName)) {
-                Glide.with(itemView).load(R.drawable.logo_humble_bundle).into(imgPlat);
+                Glide.with(itemView).load(R.drawable.logo_humble_bundle).into(IVimgPlat);
             }
             else {
-                Glide.with(itemView).load(R.drawable.img_esd_none).into(imgPlat);
+                Glide.with(itemView).load(R.drawable.img_esd_none).into(IVimgPlat);
             }
         }
     }
@@ -147,7 +150,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
         this.listener = listener;
     }
 
-//    public void getPlatform(ArrayList<HotDeal> mHotDeal) {
-//        this
+//    public Filter getFilter() {
+//        if (valueFilter == null) {
+//            valueFilter = new ValueFilter();
+//        }
+//        return valueFilter;
 //    }
 }

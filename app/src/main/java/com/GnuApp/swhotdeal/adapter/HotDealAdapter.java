@@ -14,12 +14,14 @@ import com.GnuApp.swhotdeal.data.HotDeal;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class HotDealAdapter extends RecyclerView.Adapter<HotDealAdapter.HotDealHolder> {
 
     private ArrayList<HotDeal> mHotDeal;
     private HotDealHolder hotDealHolder;
+    DecimalFormat df = new DecimalFormat("#.##");
 
     public static class HotDealHolder extends RecyclerView.ViewHolder {
 
@@ -60,8 +62,8 @@ public class HotDealAdapter extends RecyclerView.Adapter<HotDealAdapter.HotDealH
         // contents of the view with that element
         HotDeal hotDeal = mHotDeal.get(position);
 
-        String disPrice = hotDeal.getDisPrice();
-        String cost = hotDeal.getCost();
+        String disPrice = df.format(hotDeal.getDisPrice());
+        String cost = df.format(hotDeal.getCost());
         String repPicture = hotDeal.getRepPicture();
         // 플랫폼 이미지는 나중에 구현하자. 경우의 수에 따라 로컬에서 불러오는 것으로? 1, 2, 3
 

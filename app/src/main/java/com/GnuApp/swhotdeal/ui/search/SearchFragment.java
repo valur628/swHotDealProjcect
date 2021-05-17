@@ -1,5 +1,7 @@
 package com.GnuApp.swhotdeal.ui.search;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,27 +58,22 @@ public class SearchFragment extends Fragment {
         controller = new Controller();
         recyclerView = rootView.findViewById(R.id.search_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         recyclerView.setHasFixedSize(true);
+        recyclerView.setVisibility(View.GONE); // 레이아웃 숨김
         searchView = rootView.findViewById(R.id.search_view);
 
-        HotDeal hot = new HotDeal();
-        // adapter.addItem(new HotDeal("프로그람", 2077, 400000, 300000, 2500, "https://cs.gnu.ac.kr/cs/main.do", "경상대", "https://cs.gnu.ac.kr/csadmin/_Img/main_image/03.jpg", "https://cs.gnu.ac.kr/_Img/Layout/flogo.gif"));
-        // adapter.addItem(new HotDeal("program", 2066, 500000, 400000, 2000, "https://naver.com", "네이버", "https://newgh.gnu.ac.kr/common/images/T1_layout/logo.png", "https://newgh.gnu.ac.kr/common/images/T1_layout/logo.png"));
-        // adapter.addItem(hot);
         getFirebaseData(hotDealArrayList, adapter);
-
-        //adapter.addTemp(); // 여기서 추가하는 곳은 SearchAdapter의 mHotDeal
         recyclerView.setAdapter(adapter);
 
-//        adapter.setOnItemClickListener(new OnSearchClickListener() {
-//            @Override
-//            public void OnItemClick(View.OnClickListener onClickListener, View view, int position) {
-//                HotDeal item = adapter.getItem(position);
-//
-//                Toast.makeText(getActivity(), "아이템 선택됨: " + item.getSWName(), Toast.LENGTH_LONG).show();
-//            }
-//        });
+//        ArrayList<HotDeal> listForSearch;
+//        listForSearch = (ArrayList<HotDeal>)hotDealArrayList.clone();
+
+        adapter.setOnItemClickListener((onClickListener, view, position) -> {
+            HotDeal item = adapter.getItem(position);
+            //Toast.makeText(getActivity(), "아이템 선택됨: " + item.getSWName(), Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getPlatAddress()));
+            startActivity(intent);
+        });
 //        아이템 클릭시 판매 사이트로 넘어감
 //        작동 안됨 SearchFrag의 hotDealArrayList
 //        실제로 저장되는 곳은 SearchAdapter의 mHotDeal
@@ -84,9 +81,7 @@ public class SearchFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Log.d("onQueryTextChange", hotDealArrayList.toString()); // 여기서 검색하는 곳은 SearchFrag의 hotDealArrayList
-                                                                                // 하지만 실제로 저장되는 곳은 SearchAdapter의 mHotDeal
-                Log.d("search", "nothing");
+//                Log.d("search", "nothing");
                 String[] stringArray;
                 Log.d("onQueryTextSubmit", hotDealArrayList.toString());
                 Log.d("search", hotDealArrayList.toString());
@@ -114,6 +109,7 @@ public class SearchFragment extends Fragment {
                 Log.d("arrayList2", hotDealArrayList.toString());
 
                 adapter.notifyDataSetChanged();
+                recyclerView.setVisibility(View.VISIBLE);
 
                 for (int i = 0; i < hotDealArrayList.size(); i++)
                     Log.d("onclick", hotDealArrayList.get(i).getSWName());
@@ -123,25 +119,17 @@ public class SearchFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                FirebaseFirestore db = FirebaseFirestore.getInstance();// 파이어베이스 데이터베이스 연동
+                Log.d("onQueryTextChange", hotDealArrayList.toString());
+                // 여기서 검색하는 곳은 SearchFrag의 hotDealArrayList
+                // 하지만 실제로 저장되는 곳은 SearchAdapter의 mHotDeal
+
                 if (newText.equals(""))
-                    db.collection("ScrapingDB").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                hotDealArrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화시켜줌.
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    HotDeal hotDeal = document.toObject(HotDeal.class);
-                                    hotDealArrayList.add(hotDeal); //데이터를 배열리스트에 담아 리사이클러 뷰로 보낼 준비
-                                    Log.d("SearchFragment", document.getId() + "=>" + document.getData());
-                                }
-                                adapter.notifyDataSetChanged();
-                            } else {
-                                Log.w("SearchFragment", "Error getting documents.", task.getException());
-                            }
-                        }
-                    });
+                    getFirebaseData(hotDealArrayList, adapter);
                 return true;
+            }
+
+            public void openRecyclerView(){
+
             }
         });
     return rootView;
@@ -149,25 +137,22 @@ public class SearchFragment extends Fragment {
 
     public void getFirebaseData(ArrayList<HotDeal> arrayList, SearchAdapter adapter){
         FirebaseFirestore db = FirebaseFirestore.getInstance();// 파이어베이스 데이터베이스 연동
-        db.collection("ScrapingDB").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    arrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화시켜줌.
-                    for (QueryDocumentSnapshot document : task.getResult()){
-                        HotDeal hotDeal = document.toObject(HotDeal.class);
-                        hotDeal.setDivide100();
-                        Log.d("getFireBaseData", document.getId());
-                        // adapter.addItem(hotDeal); //데이터를 ArrayList에 담아 리사이클러뷰의 mHotdeal로 보냄
-                        arrayList.add(hotDeal);
+        db.collection("ScrapingDB").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                arrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화시켜줌.
+                for (QueryDocumentSnapshot document : task.getResult()){
+                    HotDeal hotDeal = document.toObject(HotDeal.class);
+                    hotDeal.setDivide100();
+                    Log.d("getFireBaseData", document.getId());
+                    // adapter.addItem(hotDeal); //데이터를 ArrayList에 담아 리사이클러뷰의 mHotdeal로 보냄
+                    arrayList.add(hotDeal);
 //                        adapter.setItems(hotDeal);
-                        Log.d("Hotdeal", document.getId() + "=>" + document.getData());
-                    }
-                    adapter.setItems(arrayList);
-                    adapter.notifyDataSetChanged(); //리스트 저장 및 새로고침
-                } else {
-                    Log.w("", "Error getting documents.", task.getException());
+                    Log.d("Hotdeal", document.getId() + "=>" + document.getData());
                 }
+                adapter.setItems(arrayList);
+                adapter.notifyDataSetChanged(); //리스트 저장 및 새로고침
+            } else {
+                Log.w("", "Error getting documents.", task.getException());
             }
         });
     }
