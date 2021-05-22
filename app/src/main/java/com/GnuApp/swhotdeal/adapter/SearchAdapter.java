@@ -32,6 +32,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
         public TextView TVswName;
         public TextView TVdisPrice;
         public TextView TVcost;
+        public TextView TVdisRate;
         public ImageView IVrepPicture;
         public ImageView IVimgPlat;
 
@@ -40,6 +41,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
             this.TVswName = itemView.findViewById(R.id.text_sw_name);
             this.TVdisPrice = itemView.findViewById(R.id.text_dis_price);
             this.TVcost = itemView.findViewById(R.id.text_cost);
+            this.TVdisRate = itemView.findViewById(R.id.text_dis_rate);
             this.IVrepPicture = itemView.findViewById(R.id.img_rep_pic);
             this.IVimgPlat = itemView.findViewById(R.id.img_plat);
 
@@ -62,14 +64,17 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
             Glide.with(itemView).load(hotDeal.getRepPicture()).into(IVrepPicture);
             String cost = df.format(hotDeal.getCost());
             String disPrice = df.format(hotDeal.getDisPrice());
+            String disRate = df.format(hotDeal.getDisRate());
+
+            TVdisRate.setText(disRate+"%");
 
             String currency = hotDeal.getCurrency();
             if ("KRW".equals(currency)) {
-                TVdisPrice.setText("₩ "+cost);
+                TVdisPrice.setText("₩ "+disPrice);
                 TVcost.setText("₩ "+cost);
             } else if ("USD".equals(currency)) {
                 TVdisPrice.setText("$ "+disPrice);
-                TVcost.setText("$ "+disPrice);
+                TVcost.setText("$ "+cost);
             }
             TVcost.setPaintFlags(TVcost.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
 

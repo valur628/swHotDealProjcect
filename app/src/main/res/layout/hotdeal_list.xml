@@ -25,13 +25,13 @@
 
             <ImageView
                 android:id="@+id/img_rep_pic"
-                android:layout_width="120dp"
+                android:layout_width="160dp"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/img_sw_none"/>
+                app:srcCompat="@drawable/img_sw_none" />
 
             <TextView
-                android:id="@+id/dis_rate"
-                android:layout_width="120dp"
+                android:id="@+id/text_dis_rate"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="0dp"
@@ -51,11 +51,11 @@
             <TextView
                 android:id="@+id/text_sw_name"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="50dp"
                 android:gravity="right"
                 android:text="소프트웨어 이름"
-                android:textSize="14sp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:id="@+id/cost_and_pic"
@@ -89,7 +89,7 @@
 
                 <ImageView
                     android:id="@+id/img_plat"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
