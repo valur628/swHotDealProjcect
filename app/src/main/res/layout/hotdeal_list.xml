@@ -45,6 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:gravity="center"
+            android:layout_marginLeft="5sp"
             android:orientation="vertical">
 
             <TextView
@@ -53,6 +54,7 @@
                 android:layout_height="30dp"
                 android:gravity="right"
                 android:text="소프트웨어 이름"
+                android:textSize="14sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <LinearLayout

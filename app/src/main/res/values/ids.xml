@@ -6,4 +6,5 @@
     <item name="text_hotdeal" type="id" />
     <item name="main_hotdeal_img" type="id" />
     <item name="textView" type="id" />
+    <item name="main_img" type="id" />
 </resources>

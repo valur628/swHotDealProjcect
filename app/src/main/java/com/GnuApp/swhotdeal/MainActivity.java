@@ -1,9 +1,13 @@
 package com.GnuApp.swhotdeal;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
 //    ArrayList<HotDeal> hotDealArrayList;
 //    RecyclerView recyclerView;
 //    RecyclerView.LayoutManager layoutManager;
-
-    static final String[] HOTDEAL_LIST = new String[50];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

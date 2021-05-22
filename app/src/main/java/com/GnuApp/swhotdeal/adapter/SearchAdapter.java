@@ -3,6 +3,7 @@ package com.GnuApp.swhotdeal.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
     OnSearchClickListener listener;
 
     public class SearchHolder extends RecyclerView.ViewHolder {
-
         public TextView TVswName;
         public TextView TVdisPrice;
         public TextView TVcost;
@@ -65,7 +65,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
         @SuppressLint("SetTextI18n")
         public void setItem(HotDeal hotDeal) {
             DecimalFormat df = new DecimalFormat("#.##");
-
             TVswName.setText(hotDeal.getSWName());
             Glide.with(itemView).load(hotDeal.getRepPicture()).into(IVrepPicture);
 
