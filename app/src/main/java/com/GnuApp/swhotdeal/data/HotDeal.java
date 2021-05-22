@@ -82,15 +82,15 @@ public class HotDeal {
     public void setCurrency(String currency) { this.currency = currency; }
 
     @PropertyName("DB_Cost")
-    public String getCost() { return String.valueOf(cost); }
+    public float getCost() { return cost; }
     public void setCost(float cost) { this.cost = cost / 100; }
 
     @PropertyName("DB_DisPrice")
-    public String getDisPrice() { return String.valueOf(disPrice); }
+    public float getDisPrice() { return disPrice; }
     public void setDisPrice(float disPrice) { this.disPrice = disPrice / 100; }
 
     @PropertyName("DB_DisRate")
-    public String getDisRate() { return String.valueOf(disRate); }
+    public float getDisRate() { return disRate; }
     public void setDisRate(float disRate) { this.disRate = disRate / 100; }
     // 할인율 서버에서 받아옴
 
