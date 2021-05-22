@@ -3,7 +3,6 @@ package com.GnuApp.swhotdeal.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-// import com.GnuApp.swhotdeal.OnSearchClickListener;
 import com.GnuApp.swhotdeal.R;
 import com.GnuApp.swhotdeal.data.HotDeal;
 
@@ -50,11 +48,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
                 public void onClick(View view) {
                     int position = getAdapterPosition();
 
-//                    for(int i = 0 ; i < mHotDeal.size() ; i++)
-//                        Log.d("search_holder", mHotDeal.get(i).getSWName());
-//
-//                    String title = mHotDeal.get(position).getSWName();
-
                     if(listener != null){
                         listener.OnItemClick(this, view, position);
                     }
@@ -67,7 +60,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
             DecimalFormat df = new DecimalFormat("#.##");
             TVswName.setText(hotDeal.getSWName());
             Glide.with(itemView).load(hotDeal.getRepPicture()).into(IVrepPicture);
-
             String cost = df.format(hotDeal.getCost());
             String disPrice = df.format(hotDeal.getDisPrice());
 
@@ -83,7 +75,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
 
             String platName = hotDeal.getPlatName();
             if ("Steam".equals(platName)) {
-                Glide.with(itemView).load(R.drawable.steam).into(IVimgPlat);
+                Glide.with(itemView).load(R.drawable.logo_steam).into(IVimgPlat);
             } else if ("HumbleBundle".equals(platName)) {
                 Glide.with(itemView).load(R.drawable.logo_humble_bundle).into(IVimgPlat);
             }
@@ -96,9 +88,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
     //inflate the layout for your list
     @NotNull
     public SearchHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-//        // Create a new view, which defines the UI of the list item
-//        View view = LayoutInflater.from(viewGroup.getContext())
-//                .inflate(R.layout.hotdeal_list_relative, viewGroup, false);
+//        Create a new view, which defines the UI of the list item
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View itemView = inflater.inflate(R.layout.hotdeal_list, viewGroup, false);
 
@@ -149,10 +139,4 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
         this.listener = listener;
     }
 
-//    public Filter getFilter() {
-//        if (valueFilter == null) {
-//            valueFilter = new ValueFilter();
-//        }
-//        return valueFilter;
-//    }
 }
