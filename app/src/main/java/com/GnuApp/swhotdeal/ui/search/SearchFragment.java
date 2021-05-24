@@ -68,22 +68,6 @@ public class SearchFragment extends Fragment {
                 Log.d("search", query);
 
                 stringArray = query.toLowerCase().split(" "); // 대소문자 구분 없앰, 띄어쓰기 단위로 구분
-//                int size = hotDealArrayList.size();
-//                try {
-//                    for (int i = 0; i < size; i++) {
-//                        for (String s : stringArray) {
-//                            if (hotDealArrayList.get(i).getSWName().toLowerCase().contains(s)) // 대소문자 구분 없앰
-//                                continue;
-//                            hotDealArrayList.remove(i);
-//                            if (size > 0)
-//                                size--;
-//                            if (i > 0)
-//                                i--;
-//                        }
-//                    }
-//                } catch (IndexOutOfBoundsException e) {
-//                    e.printStackTrace();
-//                }
                 for (Iterator<HotDeal> iter = hotDealArrayList.iterator(); iter.hasNext(); ) {
                     HotDeal item = iter.next();
                     for (String s : stringArray) {
@@ -108,7 +92,6 @@ public class SearchFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
                 Log.d("onQueryTextChange", hotDealArrayList.toString());
                 if (newText.equals(""))
-                    recyclerView.setVisibility(View.INVISIBLE);
                     getFirebaseData(hotDealArrayList, adapter);
                 return true;
             }
