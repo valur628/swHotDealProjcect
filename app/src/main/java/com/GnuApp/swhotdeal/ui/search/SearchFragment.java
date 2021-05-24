@@ -5,45 +5,33 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.GnuApp.swhotdeal.Controller;
 import com.GnuApp.swhotdeal.R;
-import com.GnuApp.swhotdeal.adapter.OnSearchClickListener;
 import com.GnuApp.swhotdeal.data.HotDeal;
 import com.GnuApp.swhotdeal.adapter.SearchAdapter;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class SearchFragment extends Fragment {
 
     ArrayList<HotDeal> hotDealArrayList;
     RecyclerView recyclerView;
-//    RecyclerView.LayoutManager layoutManager;
     LinearLayoutManager layoutManager;
     SearchView searchView;
     SearchAdapter adapter;
     Controller controller;
-    FirebaseFirestore db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,46 +52,45 @@ public class SearchFragment extends Fragment {
 
         getFirebaseData(hotDealArrayList, adapter);
         recyclerView.setAdapter(adapter);
-
-//        ArrayList<HotDeal> listForSearch;
-//        listForSearch = (ArrayList<HotDeal>)hotDealArrayList.clone();
-
         adapter.setOnItemClickListener((onClickListener, view, position) -> {
             HotDeal item = adapter.getItem(position);
-            //Toast.makeText(getActivity(), "아이템 선택됨: " + item.getSWName(), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getPlatAddress()));
             startActivity(intent);
         });
-//        아이템 클릭시 판매 사이트로 넘어감
-//        작동 안됨 SearchFrag의 hotDealArrayList
-//        실제로 저장되는 곳은 SearchAdapter의 mHotDeal
+        // 아이템 클릭시 판매 사이트로 넘어감
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-//                Log.d("search", "nothing");
                 String[] stringArray;
                 Log.d("onQueryTextSubmit", hotDealArrayList.toString());
                 Log.d("search", hotDealArrayList.toString());
                 Log.d("search", query);
 
-                stringArray = query.split(" ");
-                int size = hotDealArrayList.size();
-                try {
-                    for (int i = 0; i < size; i++) {
-                        for (String s : stringArray) {
-                            if (hotDealArrayList.get(i).getSWName().toLowerCase().contains(s.substring(1))) { // toLowerCase추가
-                                continue;
-                            }
-                            hotDealArrayList.remove(i);
-                            if (size > 0)
-                                size--;
-                            if (i > 0)
-                                i--;
+                stringArray = query.toLowerCase().split(" "); // 대소문자 구분 없앰, 띄어쓰기 단위로 구분
+//                int size = hotDealArrayList.size();
+//                try {
+//                    for (int i = 0; i < size; i++) {
+//                        for (String s : stringArray) {
+//                            if (hotDealArrayList.get(i).getSWName().toLowerCase().contains(s)) // 대소문자 구분 없앰
+//                                continue;
+//                            hotDealArrayList.remove(i);
+//                            if (size > 0)
+//                                size--;
+//                            if (i > 0)
+//                                i--;
+//                        }
+//                    }
+//                } catch (IndexOutOfBoundsException e) {
+//                    e.printStackTrace();
+//                }
+                for (Iterator<HotDeal> iter = hotDealArrayList.iterator(); iter.hasNext(); ) {
+                    HotDeal item = iter.next();
+                    for (String s : stringArray) {
+                        if (!(item.getSWName().toLowerCase().contains(s))) {
+                            iter.remove();
                         }
                     }
-                } catch (IndexOutOfBoundsException e) {
-                    e.printStackTrace();
                 }
 
                 Log.d("arrayList2", hotDealArrayList.toString());
@@ -112,7 +99,7 @@ public class SearchFragment extends Fragment {
                 recyclerView.setVisibility(View.VISIBLE);
 
                 for (int i = 0; i < hotDealArrayList.size(); i++)
-                    Log.d("onclick", hotDealArrayList.get(i).getSWName());
+                    Log.d("loaded", hotDealArrayList.get(i).getSWName());
 
                 return true;
             }
@@ -120,16 +107,10 @@ public class SearchFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 Log.d("onQueryTextChange", hotDealArrayList.toString());
-                // 여기서 검색하는 곳은 SearchFrag의 hotDealArrayList
-                // 하지만 실제로 저장되는 곳은 SearchAdapter의 mHotDeal
-
                 if (newText.equals(""))
+                    recyclerView.setVisibility(View.INVISIBLE);
                     getFirebaseData(hotDealArrayList, adapter);
                 return true;
-            }
-
-            public void openRecyclerView(){
-
             }
         });
     return rootView;

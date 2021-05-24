@@ -65,7 +65,7 @@ public class HotdealFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         HotDeal hot = new HotDeal();
-        adapter.addItem(new HotDeal("프로그람", 2077, 400000, 300000, 2500, "https://cs.gnu.ac.kr/cs/main.do", "경상대", "https://cs.gnu.ac.kr/csadmin/_Img/main_image/03.jpg", "https://cs.gnu.ac.kr/_Img/Layout/flogo.gif"));
+        //adapter.addItem(new HotDeal("프로그람", 2077, 400000, 300000, 2500, "https://cs.gnu.ac.kr/cs/main.do", "경상대", "https://cs.gnu.ac.kr/csadmin/_Img/main_image/03.jpg", "https://cs.gnu.ac.kr/_Img/Layout/flogo.gif"));
         getFirebaseData(hotDealArrayList, adapter);
 
         recyclerView.setAdapter(adapter);
