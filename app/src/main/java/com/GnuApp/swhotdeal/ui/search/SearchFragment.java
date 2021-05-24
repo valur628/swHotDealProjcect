@@ -47,7 +47,6 @@ public class SearchFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.search_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
-        recyclerView.setVisibility(View.GONE); // 레이아웃 숨김
         searchView = rootView.findViewById(R.id.search_view);
 
         getFirebaseData(hotDealArrayList, adapter);
@@ -58,6 +57,14 @@ public class SearchFragment extends Fragment {
             startActivity(intent);
         });
         // 아이템 클릭시 판매 사이트로 넘어감
+        
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setIconified(false);
+            }
+        });
+        // 돋보기 안 눌러도 됨 ㅎㅎ
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -68,12 +75,11 @@ public class SearchFragment extends Fragment {
                 Log.d("search", query);
 
                 stringArray = query.toLowerCase().split(" "); // 대소문자 구분 없앰, 띄어쓰기 단위로 구분
-                for (Iterator<HotDeal> iter = hotDealArrayList.iterator(); iter.hasNext(); ) {
-                    HotDeal item = iter.next();
-                    for (String s : stringArray) {
-                        if (!(item.getSWName().toLowerCase().contains(s))) {
+                for (String s : stringArray) {
+                    for (Iterator<HotDeal> iter = hotDealArrayList.iterator(); iter.hasNext(); ) {
+                        HotDeal item = iter.next();
+                        if (!(item.getSWName().toLowerCase().contains(s)))
                             iter.remove();
-                        }
                     }
                 }
 
@@ -92,6 +98,7 @@ public class SearchFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
                 Log.d("onQueryTextChange", hotDealArrayList.toString());
                 if (newText.equals(""))
+                    //recyclerView.setVisibility(View.GONE);
                     getFirebaseData(hotDealArrayList, adapter);
                 return true;
             }
