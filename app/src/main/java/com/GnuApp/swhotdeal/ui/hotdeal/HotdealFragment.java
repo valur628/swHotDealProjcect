@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +54,7 @@ public class HotdealFragment extends Fragment {
         String beforeString = "";
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_hotdeal, container, false);
+        LinearLayout linear = rootView.findViewById(R.id.main_item);
 
 
         hotDealArrayList = new ArrayList<>();
@@ -69,6 +71,14 @@ public class HotdealFragment extends Fragment {
         getFirebaseData(hotDealArrayList, adapter);
 
         recyclerView.setAdapter(adapter);
+
+        linear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://store.steampowered.com/app/973600/Movavi_Video_Suite_18__Video_Making_Software__Edit_Convert_Capture_Screen_and_more"));
+                startActivity(intent);
+            }
+        });
 
         adapter.setOnItemClickListener((onClickListener, view, position) -> {
             HotDeal item = adapter.getItem(position);

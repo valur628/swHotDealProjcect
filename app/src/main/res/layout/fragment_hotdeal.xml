@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/main_item"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:background="#DD0C0C"
@@ -40,7 +41,9 @@
                     android:layout_margin="2dp"
                     android:textSize="15dp"
                     android:textColor="#FFFFFF"
-                    android:text="Movavi Video Suite 18 - Video Making Software - Edit, Convert, Capture Screen, and more"/>
+                    android:text="Movavi Video Suite 18 - Video Making Software - Edit, Convert, Capture Screen, and more"
+                    android:maxLines="2"
+                    android:ellipsize="end"/>
 
                 <TextView
                     android:layout_width="wrap_content"
