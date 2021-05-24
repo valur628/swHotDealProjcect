@@ -1,6 +1,8 @@
 package com.GnuApp.swhotdeal.ui.hotdeal;
 
+import android.content.Intent;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -68,17 +70,11 @@ public class HotdealFragment extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
-//        adapter.setOnItemClickListener(new OnSearchClickListener() {
-//            @Override
-//            public void OnItemClick(View.OnClickListener onClickListener, View view, int position) {
-//                HotDeal item = adapter.getItem(position);
-//
-//                Toast.makeText(getActivity(), "아이템 선택됨: " + item.getSWName(), Toast.LENGTH_LONG).show();
-//            }
-//        });
-//        아이템 클릭시 판매 사이트로 넘어감
-//        작동 안됨 SearchFrag의 hotDealArrayList
-//        실제로 저장되는 곳은 SearchAdapter의 mHotDeal
+        adapter.setOnItemClickListener((onClickListener, view, position) -> {
+            HotDeal item = adapter.getItem(position);
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getPlatAddress()));
+            startActivity(intent);
+        });
 
         return rootView;
     }

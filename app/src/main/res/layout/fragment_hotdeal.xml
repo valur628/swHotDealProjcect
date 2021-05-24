@@ -23,13 +23,13 @@
                 android:layout_width="170dp"
                 android:layout_height="170dp"
                 android:layout_gravity="center"
-                android:src="@drawable/header"/>
+                android:src="@drawable/mainheader"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="30dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -40,26 +40,16 @@
                     android:layout_margin="2dp"
                     android:textSize="15dp"
                     android:textColor="#FFFFFF"
-                    android:text="Lossless Scaling"/>
+                    android:text="Movavi Video Suite 18 - Video Making Software - Edit, Convert, Capture Screen, and more"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="3dp"
+                    android:layout_marginTop="3dp"
                     android:textColor="#FFFFFF"
                     android:textSize="20dp"
-                    android:text="80.0" />
-
-                <TextView
-                    android:id="@+id/main_disPeriod"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="3dp"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15dp"
-                    android:text="20000101" />
+                    android:text="85%" />
 
                 <TextView
                     android:id="@+id/main_cost"
@@ -67,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="3dp"
-                    android:text="5500.0"
+                    android:text="￦90000"
                     android:textSize="12dp"
                     android:textColor="#FFFFFF" />
 
@@ -79,7 +69,7 @@
                     android:layout_margin="3dp"
                     android:textColor="#FFFFFF"
                     android:textSize="20dp"
-                    android:text="1100.0" />
+                    android:text="￦13500" />
 
             </LinearLayout>
 
