@@ -55,7 +55,9 @@
                 android:gravity="right"
                 android:text="소프트웨어 이름"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="20sp" />
+                android:textSize="16sp"
+                android:maxLines="2"
+                android:ellipsize="end"/>
 
             <LinearLayout
                 android:id="@+id/cost_and_pic"
