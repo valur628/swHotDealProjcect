@@ -32,9 +32,7 @@ public class SettingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
-        String[] settingList = {"키워드 알림 설정", "무료 소프트웨어 알림 설정", "핫딜 일정 알림 설정", "앱 업데이트 알림 설정", "크롤링하는 최대 핫딜 수 설정",
-                "크롤링 할 ESD 설정", "크롤링 할 가격 및 할인율 설정", "크롤링 갱신 기간 설정" ,"개발자 정보"};
-//        String[] settingList = {"개발자 정보"};
+        String[] settingList = {"개발자 정보"};
         ListView listView = (ListView) view.findViewById(R.id.hotdeal_list);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, settingList);
