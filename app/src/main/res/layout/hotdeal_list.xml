@@ -20,13 +20,18 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
+            android:layout_gravity="bottom"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/img_rep_pic"
                 android:layout_width="160dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/text_dis_rate"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="0dp"
+                android:adjustViewBounds="true"
                 app:srcCompat="@drawable/img_sw_none" />
 
             <TextView
@@ -34,7 +39,7 @@
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="0dp"
+                android:layout_marginBottom="15dp"
                 android:background="#4CAF50"
                 android:gravity="center"
                 android:text="70%" />
