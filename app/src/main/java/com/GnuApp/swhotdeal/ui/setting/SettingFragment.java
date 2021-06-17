@@ -49,12 +49,5 @@ public class SettingFragment extends Fragment {
 
         return view;
     }
-
-//    @Override
-//    public void onListItemClick(ListView l, View v, int position, long id){
-//        String strText = (String) l.getItemAtPosition(position);
-//        Log.d("Fragment: ", position +  ": " + strText);
-//        Toast.makeText(this.getContext(), "클릭: " + position + " " + strText, Toast.LENGTH_SHORT).show();
-//    }
 }
 

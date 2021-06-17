@@ -44,8 +44,6 @@ public class HotdealFragment extends Fragment {
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     SearchAdapter adapter;
-    FirebaseFirestore db;
-    FragmentManager manager;
     TextView main_cost;
 
     @Override
@@ -67,7 +65,6 @@ public class HotdealFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         HotDeal hot = new HotDeal();
-        //adapter.addItem(new HotDeal("프로그람", 2077, 400000, 300000, 2500, "https://cs.gnu.ac.kr/cs/main.do", "경상대", "https://cs.gnu.ac.kr/csadmin/_Img/main_image/03.jpg", "https://cs.gnu.ac.kr/_Img/Layout/flogo.gif"));
         getFirebaseData(hotDealArrayList, adapter);
 
         recyclerView.setAdapter(adapter);
@@ -100,9 +97,7 @@ public class HotdealFragment extends Fragment {
                         HotDeal hotDeal = document.toObject(HotDeal.class);
                         hotDeal.setDivide100();
                         Log.d("getFireBaseData", document.getId());
-                        // adapter.addItem(hotDeal); //데이터를 ArrayList에 담아 리사이클러뷰의 mHotdeal로 보냄
                         arrayList.add(hotDeal);
-//                        adapter.setItems(hotDeal);
                         Log.d("Hotdeal", document.getId() + "=>" + document.getData());
                     }
                     adapter.setItems(arrayList);
